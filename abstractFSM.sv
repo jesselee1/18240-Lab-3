@@ -47,6 +47,7 @@ module abstractFSM(
                 drop = 1'b1;
                 credit = 4'd0;
             end
+        endcase
 
     always_comb begin
         case (currState)
