@@ -11,9 +11,9 @@ module abstractFSM(
     
     always_ff @ (posedge clock)
         currState <= nextState;
-        q0 <= currState[0];
-        q1 <= currState[1];
-        q2 <= currState[2];
+        q0 = currState[0];
+        q1 = currState[1];
+        q2 = currState[2];
         case (currState)
             A0: begin
                 drop = 1'b0;
