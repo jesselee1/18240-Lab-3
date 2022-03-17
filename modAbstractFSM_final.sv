@@ -54,6 +54,7 @@ module abstractFSM(
                         default: begin 
                             nextState = N0H;
                             nextDrop = zero;
+                        end
                     endcase
                     credit = 4'b0;
                 end
@@ -73,6 +74,7 @@ module abstractFSM(
                         default: begin 
                             nextState = N1H;
                             nextDrop = zero;
+                        end
                     endcase
                     credit = 4'd1;
                 end
@@ -92,6 +94,7 @@ module abstractFSM(
                         default: begin 
                             nextState = N1H;
                             nextDrop = zero;
+                        end
                     endcase
                     credit = 4'd1;
                 end
@@ -111,6 +114,7 @@ module abstractFSM(
                         default: begin 
                             nextState = N2H;
                             nextDrop = zero;
+                        end
                     endcase
                     credit = 4'd2;
                 end
@@ -130,6 +134,7 @@ module abstractFSM(
                         default: begin 
                             nextState = N2H;
                             nextDrop = zero;
+                        end
                     endcase
                     credit = 4'd2;
                 end
@@ -150,6 +155,7 @@ module abstractFSM(
                         default: begin 
                             nextState = N3H;
                             nextDrop = zero;
+                        end
                     endcase
                     credit = 4'd3;
                 end
@@ -166,10 +172,11 @@ module abstractFSM(
                         2'b11: begin 
                         nextState = D0H2;
                         nextDrop = two;
-                    end
+                        end
                         default: begin 
                             nextState = N3H;
                             nextDrop = zero;
+                        end
                     endcase
                     credit = 4'd3;
                 end
@@ -188,6 +195,7 @@ module abstractFSM(
                         default: begin 
                             nextState = N0H;
                             nextDrop = zero;
+                        end
                     endcase
                     credit = 4'd0;
                 end
