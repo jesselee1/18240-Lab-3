@@ -41,146 +41,200 @@ module abstractFSM(
             case (currState)
                 N0G:begin
                     case (coin)
-                        2'b01: nextState = N1H;
-                        2'b10: nextState = N3H;
-                        2'b11: nextState = D1H;
-                        default: nextState = N0H;
+                        2'b01: begin 
+                            nextState = N1H;
+                            nextDrop = zero;
+                        2'b10: begin 
+                            nextState = N3H;
+                            nextDrop = zero;
+                        2'b11: begin 
+                            nextState = D1H;
+                            nextDrop = one;
+                        end
+                        default: begin 
+                            nextState = N0H;
+                            nextDrop = zero;
                     endcase
                     credit = 4'b0;
                 end
                 N1G:begin
                     case (coin)
-                        2'b01: nextState = N2H;
-                        2'b10: nextState = D0H;
-                        2'b11: nextState = D1H;
-                        default: nextState = N1H;
+                        2'b01: begin 
+                            nextState = N2H;
+                            nextDrop = zero;
+                        2'b10: begin 
+                            nextState = D0H;
+                            nextDrop = one;
+                        end
+                        2'b11: begin 
+                            nextState = D1H;
+                            nextDrop = one;
+                        end
+                        default: begin 
+                            nextState = N1H;
+                            nextDrop = zero;
                     endcase
                     credit = 4'd1;
                 end
                 D1G:begin
                     case (coin)
-                        2'b01: nextState = N2H;
-                        2'b10: nextState = D0H;
-                        2'b11: nextState = D2H;
-                        default: nextState = N1H;
+                        2'b01: begin 
+                            nextState = N2H;
+                            nextDrop = zero;
+                        2'b10: begin 
+                            nextState = D0H;
+                            nextDrop = one;
+                        end
+                        2'b11: begin 
+                            nextState = D2H;
+                            nextDrop = one;
+                        end
+                        default: begin 
+                            nextState = N1H;
+                            nextDrop = zero;
                     endcase
                     credit = 4'd1;
                 end
                 N2G:begin
                     case (coin)
-                        2'b01: nextState = N3H;
-                        2'b10: nextState = D1H;
-                        2'b11: nextState = D3H;
-                        default: nextState = N2H;
+                        2'b01: begin 
+                            nextState = N3H;
+                            nextDrop = zero;
+                        2'b10: begin 
+                            nextState = D1H;
+                            nextDrop = one;
+                        end
+                        2'b11: begin 
+                            nextState = D3H;
+                            nextDrop = one;
+                        end
+                        default: begin 
+                            nextState = N2H;
+                            nextDrop = zero;
                     endcase
                     credit = 4'd2;
                 end
                 D2G:begin
                     case (coin)
-                        2'b01: nextState = N3H;
-                        2'b10: nextState = D1H;
-                        2'b11: nextState = D3H;
-                        default: nextState = N2H;
+                        2'b01: begin 
+                            nextState = N3H;
+                            nextDrop = zero;
+                        2'b10: begin 
+                            nextState = D1H;
+                            nextDrop = one;
+                        end
+                        2'b11: begin 
+                            nextState = D3H;
+                            nextDrop = one;
+                        end
+                        default: begin 
+                            nextState = N2H;
+                            nextDrop = zero;
                     endcase
                     credit = 4'd2;
                 end
                 N3G:begin
                     case (coin)
-                        2'b01: nextState = D0H;
-                        2'b10: nextState = D2H;
-                        2'b11: nextState = D0H2;
-                        default: nextState = N3H;
+                        2'b01: begin 
+                            nextState = D0H;
+                            nextDrop = one;
+                        end
+                        2'b10: begin 
+                            nextState = D2H;
+                            nextDrop = one;
+                        end
+                        2'b11: begin 
+                        nextState = D0H2;
+                        nextDrop = two;
+                    end
+                        default: begin 
+                            nextState = N3H;
+                            nextDrop = zero;
                     endcase
                     credit = 4'd3;
                 end
                 D3G:begin
                     case (coin)
-                        2'b01: nextState = D0H;
-                        2'b10: nextState = D2H;
-                        2'b11: nextState = D0H2;
-                        default: nextState = N3H;
+                        2'b01: begin 
+                            nextState = D0H;
+                            nextDrop = one;
+                        end
+                        2'b10: begin 
+                            nextState = D2H;
+                            nextDrop = one;
+                        end
+                        2'b11: begin 
+                        nextState = D0H2;
+                        nextDrop = two;
+                    end
+                        default: begin 
+                            nextState = N3H;
+                            nextDrop = zero;
                     endcase
                     credit = 4'd3;
                 end
                 D0G:begin
                     case (coin)
-                        2'b01: nextState = N1H;
-                        2'b10: nextState = N3H;
-                        2'b11: nextState = D1H;
-                        default: nextState = N0H;
+                        2'b01: begin 
+                            nextState = N1H;
+                            nextDrop = zero;
+                        2'b10: begin 
+                            nextState = N3H;
+                            nextDrop = zero;
+                        2'b11: begin 
+                            nextState = D1H;
+                            nextDrop = one;
+                        end
+                        default: begin 
+                            nextState = N0H;
+                            nextDrop = zero;
                     endcase
                     credit = 4'd0;
                 end
-                N0H: begin
+                N0H:begin
                     if (coin == coinState) nextState = currState;
-                        else begin
-                        nextState = N0G;
-                        nextDrop = zero;
-                    end
-                        credit = 4'd0;
+                    else nextState = N0G;
+                    credit = 4'd0;
                 end
-                N1H: begin
+                N1H:begin
                     if (coin == coinState) nextState = currState;
-                        else begin
-                        nextState = N1G;
-                        nextDrop = zero;
-                    end
-                        credit = 4'd1;
+                    else nextState = N1G;
+                    credit = 4'd1;
                 end
-                D1H: begin
+                D1H:begin
                     if (coin == coinState) nextState = currState;
-                        else begin
-                        nextState = D1G;
-                        nextDrop = one;
-                    end
-                        credit = 4'd1;
+                    else nextState = D1G;
+                    credit = 4'd1;
                 end
                 N2H:begin
                     if (coin == coinState) nextState = currState;
-                        else begin
-                        nextState = N2G;
-                        nextDrop = zero;
-                    end
-                        credit = 4'd2;
+                    else nextState = N2G;
+                    credit = 4'd2;
                 end
                 D2H:begin
                     if (coin == coinState) nextState = currState;
-                        else begin
-                        nextState = D2G;
-                        nextDrop = one;
-                    end
-                        credit = 4'd2;
+                    else nextState = D2G;
+                    credit = 4'd2;
                 end
                 N3H:begin
                     if (coin == coinState) nextState = currState;
-                        else begin
-                        nextState = N3G;
-                        nextDrop = zero;
-                    end
-                        credit = 4'd3;
+                    else nextState = N3G;
+                    credit = 4'd3;
                 end
                 D3H:begin
                     if (coin == coinState) nextState = currState;
-                        else begin
-                        nextState = D3G;
-                        nextDrop = one;
-                    end
-                        credit = 4'd3;
+                    else nextState = D3G;
+                    credit = 4'd3;
                 end
                 D0H:begin
                     if (coin == coinState) nextState = currState;
-                        else begin
-                        nextState = D0G;
-                        nextDrop = one;
-                    end
-                        credit = 4'd0;
+                    else nextState = D0G;
+                    credit = 4'd0;
                 end
                 D0H2:begin
                     if (coin == coinState) nextState = currState;
-                        else begin
-                        nextState = D0G;
-                        nextDrop = two;
-                    end
+                    else nextState = D0G;
+                    credit = 4'd0;
                 end
             endcase
 		end
